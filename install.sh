@@ -26,6 +26,11 @@ echo "ghostty:"
 mkdir -p ~/.config/ghostty
 link "$DOTFILES/ghostty/config" ~/.config/ghostty/config
 
+# Zellij
+echo "zellij:"
+mkdir -p ~/.config/zellij
+link "$DOTFILES/zellij/config.kdl" ~/.config/zellij/config.kdl
+
 # tmux
 echo "tmux:"
 link "$DOTFILES/tmux/.tmux.conf" ~/.tmux.conf
