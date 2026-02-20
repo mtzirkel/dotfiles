@@ -1,27 +1,48 @@
-# 💤 Travis' LazyVim
+# dotfiles
 
-A starter template for [LazyVim](https://github.com/LazyVim/LazyVim).
-Refer to the [documentation](https://lazyvim.github.io/installation) to get started.
+Personal dotfiles for macOS and Linux.
 
-## Install .10+ Neovim and lazyvim dependecies 
+## Contents
 
+- `nvim/` — Neovim (LazyVim) configuration
+- `ghostty/` — Ghostty terminal config
+- `tmux/` — tmux config
+- `zsh/` — zsh shell config (.zshrc, .zprofile)
+
+## Install
+
+```bash
+git clone https://github.com/mtzirkel/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles
+./install.sh
 ```
+
+The install script symlinks everything to the expected locations, backing up any existing files.
+
+## Dependencies
+
+### Neovim (0.10+)
+
+**macOS:**
+```bash
+brew install neovim fzf ripgrep
+```
+
+**Linux:**
+```bash
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
-sudo apt install neovim
-sudo apt install build-essential
-sudo apt install fzf
+sudo apt install neovim build-essential fzf
 ```
 
-## Clone this config
-```
-git clone  https://github.com/mtzirkel/lazyvim.git ~/.config/nvim
-```
--------------------------------------------------------------------------------------------------------------------------------
-## Add NerdFonts
-```
+### Nerd Fonts
+
+```bash
+# macOS
+brew install font-meslo-lg-nerd-font
+
+# Linux
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts && curl -fLO https://github.com/ryanoasis/nerd-fonts/raw/HEAD/patched-fonts/DroidSansMono/DroidSansMNerdFont-Regular.otf
-
-fc-cache -fv  
+fc-cache -fv
 ```

@@ -1,1 +1,6 @@
-.git/
+.DS_Store
+*.swp
+*.swo
+*~
+nvim/parsers/
+nvim/plugin/

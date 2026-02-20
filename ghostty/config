@@ -1,0 +1,17 @@
+# Font
+font-family = MesloLGS Nerd Font Mono
+font-size = 18
+
+# Appearance
+theme = Gruvbox Dark
+background-opacity = 0.7
+background-blur-radius = 20
+window-padding-x = 10
+window-padding-y = 10
+
+# macOS behavior
+macos-option-as-alt = true
+
+# Copy/paste with Cmd+C/V (defaults on macOS, explicit for clarity)
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
