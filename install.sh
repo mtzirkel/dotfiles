@@ -3,7 +3,7 @@
 # Symlinks configs and assembles platform-specific files
 set -e
 
-DOTFILES="$(cd "$(dirname "$0")" && pwd)"
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 OS="$(uname)"
 
 link() {
