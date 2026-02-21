@@ -1,16 +1,9 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.ai.codeium",
-<<<<<<< HEAD
-    "lazyvim.plugins.extras.editor.telescope"
-=======
-    "lazyvim.plugins.extras.coding.yanky",
-    "lazyvim.plugins.extras.formatting.prettier",
-    "lazyvim.plugins.extras.lang.python"
->>>>>>> 57e7975 (Added some codium and such)
+
   ],
   "news": {
-    "NEWS.md": "10960"
+    "NEWS.md": "11866"
   },
-  "version": 7
+  "version": 8
 }

@@ -1,0 +1,9 @@
+# Font
+font-family = CaskaydiaMono Nerd Font Mono
+font-size = 18
+
+# Appearance
+background-opacity = 0.7
+background-blur-radius = 20
+window-padding-x = 10
+window-padding-y = 10

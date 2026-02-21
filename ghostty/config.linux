@@ -1,0 +1,7 @@
+# Linux-specific
+
+# Ctrl+V paste (not default on Linux Ghostty)
+keybind = ctrl+v=paste_from_clipboard
+
+# Integrate with omabuntu theme switcher
+config-file = ~/.config/omakub/current/theme/ghostty.conf

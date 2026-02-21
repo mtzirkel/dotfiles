@@ -1,23 +1,28 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# ~/.zshrc — cross-platform (macOS + Linux)
+
+# Starship prompt
+eval "$(starship init zsh)"
+
+# OS-specific setup
+if [[ "$(uname)" == "Darwin" ]]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+    export PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH"
+
+    # JetBrains Toolbox
+    export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+
+elif [[ "$(uname)" == "Linux" ]]; then
+    # omabuntu environment (theme, terminal, editor vars)
+    [[ -f ~/.config/omakub/env ]] && source ~/.config/omakub/env
 fi
 
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/travism/.lmstudio/bin"
-
-# Added by Windsurf
-export PATH="/Users/travism/.codeium/windsurf/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-. "$HOME/.local/bin/env"
-
-# Personal scripts
+# Shared paths
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
+
+# uv / Python environment
+[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# Claude Code shell functions
+[[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh
