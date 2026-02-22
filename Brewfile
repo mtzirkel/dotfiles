@@ -8,7 +8,8 @@ brew "mosh"             # Mobile shell (better SSH)
 brew "neovim"           # Editor
 brew "node"             # Node.js
 brew "starship"         # Cross-shell prompt
-brew "tmux"             # Terminal multiplexer
+brew "tmux"             # Terminal multiplexer (fallback)
+brew "zellij"           # Terminal multiplexer (primary)
 
 # --- Dev tools (uncomment as needed) ---
 brew "deno"             # JS/TS runtime
