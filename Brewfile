@@ -26,5 +26,9 @@ cask "flameshot"        # Screenshot tool
 cask "font-meslo-lg-nerd-font"  # Nerd font for terminal
 cask "font-ubuntu"      # Ubuntu font
 cask "ghostty"          # Terminal emulator
+cask "google-chrome"    # Chrome browser
 cask "rectangle"        # Window tiling (keyboard shortcuts)
+cask "telegram"         # Telegram messenger
+cask "zed"              # Zed IDE
+cask "zen"              # Zen browser
 # cask "chromedriver"   # Browser automation (uncomment if needed)
