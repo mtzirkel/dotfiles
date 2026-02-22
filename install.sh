@@ -65,5 +65,11 @@ link "$DOTFILES/zsh/.zshrc" ~/.zshrc
 echo "claude:"
 link "$DOTFILES/claude/functions.sh" ~/.claude_functions.sh
 
+# --- fzf key bindings (if installed) ---
+if [ -f "$(brew --prefix 2>/dev/null)/opt/fzf/install" ]; then
+    echo "fzf:"
+    "$(brew --prefix)/opt/fzf/install" --key-bindings --completion --no-update-rc --no-bash --no-fish
+fi
+
 echo ""
 echo "Done! You may need to restart your shell or terminal."

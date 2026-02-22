@@ -5,15 +5,11 @@ eval "$(starship init zsh)"
 
 # OS-specific setup
 if [[ "$(uname)" == "Darwin" ]]; then
-    export PATH="/opt/homebrew/bin:$PATH"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
     export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-    export PATH="/Library/Frameworks/Python.framework/Versions/3.11/bin:$PATH"
-
-    # JetBrains Toolbox
-    export PATH="$PATH:$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
 
 elif [[ "$(uname)" == "Linux" ]]; then
-    # omabuntu environment (theme, terminal, editor vars)
+    # omakub environment (theme, terminal, editor vars)
     [[ -f ~/.config/omakub/env ]] && source ~/.config/omakub/env
 fi
 
@@ -23,6 +19,9 @@ export PATH="$HOME/bin:$PATH"
 
 # uv / Python environment
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
+
+# fzf key bindings
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # Claude Code shell functions
 [[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh

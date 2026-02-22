@@ -2,7 +2,7 @@
 macos-option-as-alt = true
 
 # Theme (set directly on macOS — no theme switcher)
-theme = Everforest Dark Medium
+theme = Gruvbox Dark
 
 # Copy/paste with Cmd+C/V (defaults on macOS, explicit for clarity)
 keybind = cmd+c=copy_to_clipboard

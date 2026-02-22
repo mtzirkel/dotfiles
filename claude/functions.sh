@@ -41,11 +41,12 @@ claude-project() {
     done
 
     case "$project" in
-        album|album_bot)  dir="$HOME/Work/album_bot" ;;
-        dotfiles)         dir="$HOME/.dotfiles" ;;
+        orgflow)          dir="$HOME/Projects/OrgFlow" ;;
+        album|album_bot)  dir="$HOME/Projects/album_bot" ;;
+        dotfiles)         dir="$HOME/dotfiles" ;;
         *)
             echo "Unknown project: $project"
-            echo "Available: album, dotfiles"
+            echo "Available: orgflow, album, dotfiles"
             return 1
             ;;
     esac
@@ -60,7 +61,7 @@ claude-project() {
 
 # Tab completion for claude-project
 _claude_project_completions() {
-    local projects="album album_bot dotfiles --yolo"
+    local projects="orgflow album album_bot dotfiles --yolo"
     COMPREPLY=($(compgen -W "$projects" -- "${COMP_WORDS[COMP_CWORD]}"))
 }
 complete -F _claude_project_completions claude-project
