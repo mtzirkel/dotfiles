@@ -1,7 +1,7 @@
 # ~/.zshrc — cross-platform (macOS + Linux)
 
-# Starship prompt
-eval "$(starship init zsh)"
+# Paths first — everything below depends on these
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 # OS-specific setup
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -9,13 +9,13 @@ if [[ "$(uname)" == "Darwin" ]]; then
     export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 elif [[ "$(uname)" == "Linux" ]]; then
-    # omakub environment (theme, terminal, editor vars)
-    [[ -f ~/.config/omakub/env ]] && source ~/.config/omakub/env
+    # Twomedux tools
+    export OMAKUB_PATH="$HOME/.local/share/omakub"
+    [[ -d "$OMAKUB_PATH/bin" ]] && export PATH="$OMAKUB_PATH/bin:$PATH"
 fi
 
-# Shared paths
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
+# Starship prompt
+eval "$(starship init zsh)"
 
 # uv / Python environment
 [[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"

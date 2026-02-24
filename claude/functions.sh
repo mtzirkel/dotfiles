@@ -60,8 +60,16 @@ claude-project() {
 }
 
 # Tab completion for claude-project
-_claude_project_completions() {
-    local projects="orgflow album album_bot dotfiles --yolo"
-    COMPREPLY=($(compgen -W "$projects" -- "${COMP_WORDS[COMP_CWORD]}"))
-}
-complete -F _claude_project_completions claude-project
+if [ -n "$ZSH_VERSION" ]; then
+    autoload -Uz compinit && compinit -C
+    _claude_project_completions() {
+        compadd orgflow album album_bot dotfiles --yolo
+    }
+    compdef _claude_project_completions claude-project
+elif [ -n "$BASH_VERSION" ]; then
+    _claude_project_completions() {
+        local projects="orgflow album album_bot dotfiles --yolo"
+        COMPREPLY=($(compgen -W "$projects" -- "${COMP_WORDS[COMP_CWORD]}"))
+    }
+    complete -F _claude_project_completions claude-project
+fi
