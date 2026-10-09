@@ -1,0 +1,8 @@
+# headwaters — Mac on the tailnet; runs herdr (and the tmux fallback).
+# Pulled in by `Include config.d/*` at the top of ~/.ssh/config.
+# `hw` / `hwt` in zsh/.zshrc connect through this entry.
+Host headwaters
+  HostName 100.123.6.76
+  User travis
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 30
