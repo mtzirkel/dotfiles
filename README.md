@@ -6,7 +6,11 @@ Personal dotfiles for macOS and Linux.
 
 - `nvim/` — Neovim (LazyVim) configuration
 - `ghostty/` — Ghostty terminal config
-- `tmux/` — tmux config
+- `herdr/` — herdr config (prefix `ctrl+a`) + headwaters boot script
+- `tmux/` — tmux config (fallback: `hwt`)
+- `ssh/config.d/` — SSH host fragments, pulled in by `Include config.d/*`
+- `launchd/` — LaunchAgents, installed on headwaters only
+- `scripts/` — one-off migrations
 - `zsh/` — zsh shell config (.zshrc, .zprofile)
 
 ## Install
@@ -18,6 +22,22 @@ cd ~/.dotfiles
 ```
 
 The install script symlinks everything to the expected locations, backing up any existing files.
+
+## headwaters (herdr)
+
+headwaters runs a persistent [herdr](https://herdr.dev) server; `local.herdr-boot` starts it at login, restores the saved layout, and relaunches `hermes` in the `hermes-eddy` workspace.
+
+| Command | On headwaters | Anywhere else |
+|---|---|---|
+| `hw` | attach to herdr | `mosh headwaters -- herdr` |
+| `hws` | — | same over plain SSH (mosh UDP blocked) |
+| `hwt` | tmux `main` | tmux `main` over mosh (fallback) |
+
+Detach: `ctrl+a` then `q`. All bindings: `ctrl+a` then `?`.
+
+Host-specific bits are gated on `scutil --get LocalHostName` starting with `headwaters`, in both `zsh/.zshrc` and `install.sh`.
+
+Moving an existing machine from tmux: `bash ~/dotfiles/scripts/herdr-migrate.sh`.
 
 ## Dependencies
 

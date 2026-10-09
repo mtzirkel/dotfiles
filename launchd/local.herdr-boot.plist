@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>local.herdr-boot</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/travis/dotfiles/herdr/herdr-boot.sh</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <!-- herdr server outlives this script; don't let launchd reap it -->
+    <key>AbandonProcessGroup</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/herdr-boot.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/herdr-boot.err</string>
+</dict>
+</plist>

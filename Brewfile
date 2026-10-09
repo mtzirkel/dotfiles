@@ -4,6 +4,7 @@
 # --- Core tools ---
 brew "fzf"              # Fuzzy finder
 brew "gh"               # GitHub CLI
+brew "herdr"            # Agent multiplexer (headwaters: `hw`)
 brew "mosh"             # Mobile shell (better SSH)
 brew "neovim"           # Editor
 brew "node"             # Node.js

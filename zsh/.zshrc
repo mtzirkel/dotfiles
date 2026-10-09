@@ -28,3 +28,20 @@ autoload -Uz compinit && compinit
 
 # Claude Code shell functions
 [[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh
+
+# --- headwaters (herdr) -------------------------------------------------
+# hw  = attach to herdr on headwaters (mosh from elsewhere, local on the box)
+# hwt = old tmux `main` session, kept as a fallback during the herdr pilot
+# Absolute paths: mosh/ssh commands on macOS don't get Homebrew's PATH.
+HW_BIN=/opt/homebrew/bin
+if [[ "$(uname)" == "Darwin" && "${(L)$(scutil --get LocalHostName 2>/dev/null)}" == headwaters* ]]; then
+    hw() {
+        if [[ -n "$HERDR_ENV" ]]; then echo "already inside herdr"; return 1; fi
+        herdr "$@"
+    }
+    hwt() { tmux new-session -A -s main; }
+else
+    hw()  { mosh --server=$HW_BIN/mosh-server headwaters -- $HW_BIN/herdr "$@"; }
+    hws() { ssh -t headwaters $HW_BIN/herdr "$@"; }   # plain SSH, if mosh UDP is blocked
+    hwt() { mosh --server=$HW_BIN/mosh-server headwaters -- $HW_BIN/tmux new-session -A -s main; }
+fi
