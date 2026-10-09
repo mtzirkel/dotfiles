@@ -23,5 +23,8 @@ export PATH="$HOME/bin:$PATH"
 # fzf key bindings
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
+# Initialize zsh completion system
+autoload -Uz compinit && compinit
+
 # Claude Code shell functions
 [[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh
