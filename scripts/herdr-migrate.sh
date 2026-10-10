@@ -27,7 +27,13 @@ git checkout main
 git pull --ff-only
 
 # --- 2. tools + links --------------------------------------------------
-brew install herdr mosh
+if [ "$(uname)" = Darwin ]; then
+    brew install herdr mosh
+elif ! command -v mosh >/dev/null; then
+    # Linux clients only need mosh; herdr runs on headwaters.
+    echo "mosh missing — install it, then rerun:  sudo apt install -y mosh"
+    exit 1
+fi
 ./install.sh
 
 # --- 3. per-host -------------------------------------------------------
