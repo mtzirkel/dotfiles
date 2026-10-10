@@ -26,11 +26,14 @@ autoload -Uz compinit && compinit
 # fzf key bindings
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-# Initialize zsh completion system
-autoload -Uz compinit && compinit
-
 # Claude Code shell functions
 [[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh
+
+# mosh + tmux: attach (or create) a session on any remote host
+# Usage: mx <host> [session]   → defaults to session "main"
+mx () {
+        mosh "$1" -- tmux new -A -D -s "${2:-main}"
+}
 
 # --- headwaters (herdr) -------------------------------------------------
 # hw  = attach to herdr on headwaters (mosh from elsewhere, local on the box)
