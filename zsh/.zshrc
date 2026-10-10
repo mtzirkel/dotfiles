@@ -29,9 +29,6 @@ autoload -Uz compinit && compinit
 # Claude Code shell functions
 [[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh
 
-# OpenClaw Completion
-[[ -f "$HOME/.openclaw/completions/openclaw.zsh" ]] && source "$HOME/.openclaw/completions/openclaw.zsh"
-
 # mosh + tmux: attach (or create) a session on any remote host
 # Usage: mx <host> [session]   → defaults to session "main"
 mx () {
