@@ -1,0 +1,12 @@
+[Unit]
+Description=Refresh the machine-info block in agent instruction files
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Give Tailscale a moment so its name/IP are available
+ExecStartPre=/bin/sleep 20
+ExecStart=%h/.local/bin/agents-machine-info
+
+[Install]
+WantedBy=default.target

@@ -12,6 +12,8 @@ Personal dotfiles for macOS and Linux.
 - `launchd/` — LaunchAgents, installed on headwaters only
 - `scripts/` — one-off migrations
 - `zsh/` — zsh shell config (.zshrc, .zprofile)
+- `agents/` — `agents-machine-info`: keeps a "This machine" block (hostname, hardware, OS, Tailscale) in `~/AGENTS.md`, `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` and `~/.hermes/AGENTS.md`, refreshed at login (launchd on macOS, `systemd/` on Linux)
+- `systemd/` — systemd user units (Linux)
 
 ## Install
 
