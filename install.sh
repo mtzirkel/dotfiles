@@ -6,6 +6,11 @@ set -e
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
 OS="$(uname)"
 
+# Omarchy manages nvim, ghostty, starship and tmux itself (theme switching
+# rewrites their colors), so leave those alone there.
+OMARCHY=false
+[ -d /usr/share/omarchy ] && OMARCHY=true
+
 link() {
     local src="$1" dst="$2"
     if [ -e "$dst" ] || [ -L "$dst" ]; then
@@ -18,9 +23,11 @@ link() {
 
 echo "Installing dotfiles from $DOTFILES"
 echo "Detected OS: $OS"
+$OMARCHY && echo "Detected Omarchy: skipping nvim, ghostty, starship, tmux"
 echo ""
 
 # --- Neovim ---
+if ! $OMARCHY; then
 echo "nvim:"
 mkdir -p ~/.config
 link "$DOTFILES/nvim" ~/.config/nvim
@@ -42,6 +49,7 @@ for theme in "$DOTFILES/ghostty/themes/"*; do
     [ -f "$theme" ] && cp "$theme" ~/.config/ghostty/themes/
 done
 echo "  copied: custom themes -> ~/.config/ghostty/themes/"
+fi
 
 # --- Zellij ---
 echo "zellij:"
@@ -78,8 +86,10 @@ mkdir -p ~/.config/herdr
 link "$DOTFILES/herdr/config.toml" ~/.config/herdr/config.toml
 
 # --- tmux (fallback: `hwt`) ---
+if ! $OMARCHY; then
 echo "tmux:"
 link "$DOTFILES/tmux/.tmux.conf" ~/.tmux.conf
+fi
 
 # --- ssh host fragments (never touches keys) ---
 echo "ssh:"
@@ -106,9 +116,11 @@ if [ "$OS" = "Darwin" ] && [[ "$(scutil --get LocalHostName 2>/dev/null | tr '[:
 fi
 
 # --- Starship ---
+if ! $OMARCHY; then
 echo "starship:"
 mkdir -p ~/.config
 link "$DOTFILES/starship/starship.toml" ~/.config/starship.toml
+fi
 
 # --- Zsh ---
 echo "zsh:"
@@ -117,6 +129,11 @@ link "$DOTFILES/zsh/.zshrc" ~/.zshrc
 # --- Claude shell functions ---
 echo "claude:"
 link "$DOTFILES/claude/functions.sh" ~/.claude_functions.sh
+# .zshrc sources it; bash machines (Omarchy, most Linux) need it in .bashrc
+if [ -f ~/.bashrc ] && ! grep -q '\.claude_functions\.sh' ~/.bashrc; then
+    printf '\n# Claude shell functions from dotfiles (claude --yolo, claude-session, claude-project)\n[[ -f ~/.claude_functions.sh ]] && source ~/.claude_functions.sh\n' >> ~/.bashrc
+    echo "  added: source ~/.claude_functions.sh to ~/.bashrc"
+fi
 
 # --- fzf key bindings (if installed) ---
 if [ -f "$(brew --prefix 2>/dev/null)/opt/fzf/install" ]; then

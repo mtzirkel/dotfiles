@@ -25,6 +25,8 @@ cd ~/.dotfiles
 
 The install script symlinks everything to the expected locations, backing up any existing files.
 
+On bash machines it also sources `claude/functions.sh` from `~/.bashrc`, so `claude --yolo` works there too. On Omarchy it skips nvim, ghostty, starship and tmux, which Omarchy manages and re-themes itself.
+
 ## headwaters (herdr)
 
 headwaters runs a persistent [herdr](https://herdr.dev) server; `local.herdr-boot` starts it at login, restores the saved layout, and relaunches `hermes` in the `hermes-eddy` workspace.
