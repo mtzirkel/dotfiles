@@ -48,6 +48,30 @@ echo "zellij:"
 mkdir -p ~/.config/zellij
 link "$DOTFILES/zellij/config.kdl" ~/.config/zellij/config.kdl
 
+# --- Agent machine info (keeps a "This machine" block in AGENTS.md/CLAUDE.md) ---
+echo "agents:"
+mkdir -p ~/.local/bin
+link "$DOTFILES/agents/agents-machine-info" ~/.local/bin/agents-machine-info
+if [ "$OS" = "Darwin" ]; then
+    # copied, not linked: launchd can skip symlinked plists at login
+    cp "$DOTFILES/launchd/local.agents-machine-info.plist" ~/Library/LaunchAgents/
+    launchctl bootout "gui/$(id -u)/local.agents-machine-info" 2>/dev/null || true
+    launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/local.agents-machine-info.plist
+    echo "  loaded: local.agents-machine-info (runs at login)"
+elif command -v systemctl >/dev/null; then
+    mkdir -p ~/.config/systemd/user
+    cp "$DOTFILES/systemd/agents-machine-info.service" ~/.config/systemd/user/
+    systemctl --user daemon-reload && systemctl --user enable agents-machine-info.service
+    echo "  enabled: agents-machine-info.service (runs at login)"
+fi
+if [ -d ~/.config/omarchy/hooks ]; then
+    mkdir -p ~/.config/omarchy/hooks/post-update.d
+    printf '#!/bin/bash\n~/.local/bin/agents-machine-info\n' > ~/.config/omarchy/hooks/post-update.d/agents-hook.sh
+    chmod +x ~/.config/omarchy/hooks/post-update.d/agents-hook.sh
+    echo "  added: Omarchy post-update hook"
+fi
+~/.local/bin/agents-machine-info | sed 's/^/  /'
+
 # --- herdr ---
 echo "herdr:"
 mkdir -p ~/.config/herdr
