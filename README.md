@@ -8,7 +8,7 @@ Personal dotfiles for macOS and Linux.
 - `ghostty/` — Ghostty terminal config
 - `herdr/` — herdr config (prefix `ctrl+a`) + headwaters boot script
 - `tmux/` — tmux config (fallback: `hwt`)
-- `ssh/config.d/` — SSH host fragments, pulled in by `Include config.d/*`
+- `ssh/config.d/` — SSH host fragments, pulled in by `Include config.d/*` (`headwaters`, `mini`, `macbook`). New Macs need Remote Login on and this machine's key: `ssh-copy-id -i ~/.ssh/id_ed25519.pub <host>`
 - `launchd/` — LaunchAgents, installed on headwaters only
 - `scripts/` — one-off migrations
 - `zsh/` — zsh shell config (.zshrc, .zprofile)

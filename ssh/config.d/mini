@@ -1,0 +1,8 @@
+# mini — Mac mini on the tailnet.
+# Pulled in by `Include config.d/*` at the top of ~/.ssh/config.
+# HostName is the Tailscale MagicDNS name, so this only resolves on the tailnet.
+Host mini
+  HostName mini
+  User travis
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 30

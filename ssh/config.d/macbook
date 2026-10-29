@@ -1,0 +1,9 @@
+# macbook — M4 MacBook on the tailnet (Tailscale name staff---travis-miller-m4-macbook-2).
+# Pulled in by `Include config.d/*` at the top of ~/.ssh/config.
+# Needs Remote Login on (System Settings > General > Sharing) and this
+# machine's key copied over: ssh-copy-id -i ~/.ssh/id_ed25519.pub macbook
+Host macbook
+  HostName staff---travis-miller-m4-macbook-2
+  User travis
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 30
