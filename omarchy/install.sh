@@ -90,6 +90,21 @@ mkdir -p ~/.config/solaar
 ln -sf "$HERE/solaar/rules.yaml" ~/.config/solaar/rules.yaml
 echo "  linked: solaar/rules.yaml (restart solaar to apply)"
 
+echo "omarchy voxtype:"
+# Dictation: 5 min per recording (default 60s cut people off mid-thought) and
+# Whisper small.en for accuracy. Keys stay Omarchy's: Left Alt+Space toggles,
+# hold Right Alt = push-to-talk (Right Alt+Space cancels itself).
+VOX=~/.config/voxtype/config.toml
+if [ -f "$VOX" ] && command -v voxtype >/dev/null; then
+    sed -i -e 's/^max_duration_secs = .*/max_duration_secs = 300/' \
+           -e 's/^model = "base\.en"$/model = "small.en"/' "$VOX"
+    [ -f ~/.local/share/voxtype/models/ggml-small.en.bin ] || voxtype setup --download --model small.en >/dev/null
+    systemctl --user restart voxtype 2>/dev/null || true
+    echo "  set: max_duration_secs = 300, model = small.en"
+else
+    echo "  skipped: voxtype not set up (Omarchy menu > Install > Dictation)"
+fi
+
 echo "omarchy screensaver:"
 # Omarchy's text screensaver off; its lock stays at 300s
 SHELL_JSON=~/.config/omarchy/shell.json
