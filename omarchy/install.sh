@@ -77,6 +77,12 @@ add_plugin() {
 if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
     add_plugin tornikegomareli.spaces https://github.com/tornikegomareli/omarchy-spaces.git
     add_plugin njpatel.omaherdr https://github.com/njpatel/omaherdr.git
+    # NWS forecast/alerts replaces the stock weather pill; radar map beside it
+    add_plugin dev.tumbleweed.nws-weather https://github.com/tumbleweedlabs/omarchy-nws-weather.git
+    add_plugin eduardodallecort.weather-radar https://github.com/eduardodallecort/omarchy-weather-radar.git
+    omarchy plugin disable omarchy.weather >/dev/null 2>&1 || true
+    omarchy bar move dev.tumbleweed.nws-weather --section centerEnd --after omarchy.elsewhen >/dev/null 2>&1 || true
+    omarchy bar move eduardodallecort.weather-radar --section centerEnd --after dev.tumbleweed.nws-weather >/dev/null 2>&1 || true
     omarchy bar set tornikegomareli.spaces perMonitor true >/dev/null   # follow Omarchy's per-monitor 1-10
     omarchy plugin disable omarchy.workspaces >/dev/null 2>&1 || true
 else
