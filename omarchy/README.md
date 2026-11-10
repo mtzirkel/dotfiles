@@ -24,6 +24,7 @@ apply live. Then do the manual steps below.
 | Bar plugins | [Spaces](https://github.com/tornikegomareli/omarchy-spaces) replaces the stock workspace numbers (app icons per workspace, `perMonitor` on so it follows Omarchy's per-monitor 1-10); [omaherdr](https://github.com/njpatel/omaherdr) shows herdr agents, including headwaters' when a `herdr --remote headwaters` window is open. Needs a desktop session |
 | Solaar | `solaar/rules.yaml` symlinked: MX Master 4 thumb button / haptic click = Omarchy menu; haptic hold + swipe = workspaces (natural direction: swipe left goes to the next one), up = fullscreen, down = close |
 | Keys | Super+Return = plain terminal, Super+Ctrl+Return = local herdr; Super+Ctrl+Left/Right = previous/next workspace |
+| Voxtype | Dictation recordings up to 5 min (default 60s cut off long dictation) and Whisper `small.en` instead of `base.en`. Keys are Omarchy's: Left Alt+Space toggles, hold Right Alt to talk; Right Alt+Space cancels itself |
 | the-source only | `HDMI-A-1` disabled (the Dell is cabled over both HDMI and USB-C/DP, and the HDMI link showed up as an invisible second screen); foot font size 11.5 for the 4K panel |
 | bash | `ssh()` wrapper (`bash/ssh-borders.sh`) tags the foot window while connected: orange for twomed-home, purple for headwaters, yellow otherwise |
 | Surfshark | Not launched at login (app setting off, autostart entry removed) |
