@@ -1,0 +1,4 @@
+#!/bin/bash
+# Open or focus Bitwarden (bound to Super+Shift+/ in ~/.config/hypr/bindings.lua).
+echo "$(date '+%F %T') pressed" >> "${XDG_STATE_HOME:-$HOME/.local/state}/launch-bitwarden.log"
+exec omarchy-launch-or-focus '^Bitwarden$' 'uwsm-app -- bitwarden-desktop'

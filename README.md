@@ -14,6 +14,7 @@ Personal dotfiles for macOS and Linux.
 - `zsh/` — zsh shell config (.zshrc, .zprofile)
 - `agents/` — `agents-machine-info`: keeps a "This machine" block (hostname, hardware, OS, Tailscale) in `~/AGENTS.md`, `~/.claude/CLAUDE.md`, `~/.codex/AGENTS.md` and `~/.hermes/AGENTS.md`, refreshed at login (launchd on macOS, `systemd/` on Linux)
 - `systemd/` — systemd user units (Linux)
+- `omarchy/` — Omarchy desktop tweaks: Binary Ring screensaver, Tokyo Night background, Hyprland snippets, ssh border colors. Run by `install.sh` on Omarchy; see `omarchy/README.md`
 
 ## Install
 

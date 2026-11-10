@@ -1,0 +1,32 @@
+%YAML 1.3
+---
+# MX Master 4 — Linux-only mapping (Mac uses Logi Options+, unaffected)
+# Thumb button click: Omarchy menu
+- MouseGesture: [Mouse Gesture Button]
+- Execute: [omarchy-menu, toggle, root]
+...
+---
+# Haptic panel click: Omarchy menu
+- MouseGesture: [Haptic]
+- Execute: [omarchy-menu, toggle, root]
+...
+---
+# Haptic hold + swipe left: next workspace (natural: push the desktop left)
+- MouseGesture: [Haptic, Mouse Left]
+- Execute: [hyprctl, dispatch, 'hl.dsp.focus({ workspace = "m+1" })']
+...
+---
+# Haptic hold + swipe right: previous workspace (natural: push the desktop right)
+- MouseGesture: [Haptic, Mouse Right]
+- Execute: [hyprctl, dispatch, 'hl.dsp.focus({ workspace = "m-1" })']
+...
+---
+# Haptic hold + swipe up: toggle fullscreen
+- MouseGesture: [Haptic, Mouse Up]
+- Execute: [hyprctl, dispatch, 'hl.dsp.window.fullscreen({ mode = "fullscreen" })']
+...
+---
+# Haptic hold + swipe down: close active window
+- MouseGesture: [Haptic, Mouse Down]
+- Execute: [hyprctl, dispatch, 'hl.dsp.window.close()']
+...

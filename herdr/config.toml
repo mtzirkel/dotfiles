@@ -1,3 +1,4 @@
+onboarding = false
 # ~/.config/herdr/config.toml — full defaults: `herdr --default-config`
 # Apply to a running server: `herdr server reload-config`
 
@@ -5,3 +6,10 @@
 # Same prefix as the old tmux setup (easier on a phone keyboard).
 # Detach is prefix+q (tmux was prefix+d); prefix+? lists every binding.
 prefix = "ctrl+a"
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "nord"
+auto_switch = false
