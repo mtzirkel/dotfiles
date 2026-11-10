@@ -1,0 +1,52 @@
+#!/bin/bash
+# Tokyo Night Binary Ring screensaver. Run by hypridle:
+#   binaryring-screensaver start   on idle
+#   binaryring-screensaver stop    on input (ignored for a moment after start)
+#   binaryring-screensaver stop force   when the lock takes over
+
+SHADER="$HOME/.config/omarchy/screensaver/tokyo-night.glsl"
+STARTED="${XDG_RUNTIME_DIR:-/tmp}/binaryring-screensaver.started"
+GRACE=3
+
+stop() {
+  # Cheap exit: hypridle calls this on every resume of the 1s listener.
+  # Key off the start marker, not the process: if binaryring was closed some
+  # other way, the shader and hidden cursor still need resetting.
+  [[ -f $STARTED || $1 == force ]] || pgrep -x binaryring >/dev/null || return 0
+
+  # Opening the fullscreen window makes Hyprland report activity, which
+  # hypridle turns into an immediate resume. Ignore resumes that soon.
+  if [[ $1 != force && -f $STARTED ]] && (( $(date +%s) - $(cat "$STARTED") < GRACE )); then
+    return 0
+  fi
+
+  pkill -x binaryring 2>/dev/null
+  rm -f "$STARTED"
+  hyprctl eval 'hl.config({ decoration = { screen_shader = "" } })' >/dev/null 2>&1
+  hyprctl eval 'hl.config({ cursor = { invisible = false } })' >/dev/null 2>&1
+}
+
+start() {
+  # Respect Omarchy's stay-awake toggle and don't draw under the lock screen
+  [[ -e $HOME/.local/state/omarchy/indicators/stay-awake ]] && exit 0
+  [[ $(omarchy-shell lock isLocked 2>/dev/null) == "true" ]] && exit 0
+  pgrep -x binaryring >/dev/null && exit 0
+
+  date +%s > "$STARTED"
+  hyprctl eval "hl.config({ decoration = { screen_shader = \"$SHADER\" } })" >/dev/null 2>&1
+  hyprctl eval 'hl.config({ cursor = { invisible = true } })' >/dev/null 2>&1
+
+  focused=$(omarchy-hyprland-monitor-focused)
+  for m in $(hyprctl monitors -j | jq -r '.[].name'); do
+    hyprctl dispatch "hl.dsp.focus({ monitor = \"$m\" })" >/dev/null 2>&1
+    hyprctl dispatch "hl.dsp.exec_cmd([[/usr/lib/xscreensaver/binaryring --growth-delay 33333 --no-color]])" >/dev/null 2>&1
+    sleep 0.5
+  done
+  hyprctl dispatch "hl.dsp.focus({ monitor = \"$focused\" })" >/dev/null 2>&1
+}
+
+case $1 in
+  start) start ;;
+  stop) stop "$2" ;;
+  *) echo "usage: binaryring-screensaver start|stop [force]" >&2; exit 1 ;;
+esac

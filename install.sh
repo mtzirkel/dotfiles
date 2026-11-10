@@ -135,6 +135,11 @@ if [ -f ~/.bashrc ] && ! grep -q '\.claude_functions\.sh' ~/.bashrc; then
     echo "  added: source ~/.claude_functions.sh to ~/.bashrc"
 fi
 
+# --- Omarchy desktop tweaks (screensaver, background, hypr snippets) ---
+if $OMARCHY; then
+    bash "$DOTFILES/omarchy/install.sh"
+fi
+
 # --- fzf key bindings (if installed) ---
 if [ -f "$(brew --prefix 2>/dev/null)/opt/fzf/install" ]; then
     echo "fzf:"

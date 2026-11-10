@@ -51,3 +51,10 @@ else
     hws() { ssh -t headwaters $HW_BIN/herdr "$@"; }   # plain SSH, if mosh UDP is blocked
     hwt() { mosh --server=$HW_BIN/mosh-server headwaters -- $HW_BIN/tmux new-session -A -s main; }
 fi
+
+# New Ghostty windows open in herdr (on Omarchy, Super+Ctrl+Return does the same).
+# Not exec'd: detaching (ctrl+a q) leaves a plain shell. NO_HERDR=1 skips it.
+if [[ -o interactive && "$TERM_PROGRAM" == ghostty && -z "$HERDR_ENV" && -z "$SSH_CONNECTION" && -z "$NO_HERDR" ]] \
+    && command -v herdr >/dev/null; then
+    herdr
+fi
