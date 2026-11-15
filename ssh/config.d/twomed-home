@@ -1,0 +1,8 @@
+# twomed-home — Linux box on the tailnet; the account there is `twomed`, not `travis`.
+# Pulled in by `Include config.d/*` at the top of ~/.ssh/config.
+# Needs this machine's key copied over once: ssh-copy-id -i ~/.ssh/id_ed25519.pub twomed-home
+Host twomed-home
+  HostName twomed-home
+  User twomed
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 30
