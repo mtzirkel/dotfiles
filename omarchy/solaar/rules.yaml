@@ -30,3 +30,20 @@
 - MouseGesture: [Haptic, Mouse Down]
 - Execute: [hyprctl, dispatch, 'hl.dsp.window.close()']
 ...
+---
+# MX Anywhere 3S — middle button is diverted to Mouse Gestures (Solaar:
+# Key/Button Diversion > Middle Button), so these rules handle it.
+# Hold middle + swipe left: next workspace (natural, same as the MX Master 4)
+- MouseGesture: [Middle Button, Mouse Left]
+- Execute: [hyprctl, dispatch, 'hl.dsp.focus({ workspace = "m+1" })']
+...
+---
+# Hold middle + swipe right: previous workspace
+- MouseGesture: [Middle Button, Mouse Right]
+- Execute: [hyprctl, dispatch, 'hl.dsp.focus({ workspace = "m-1" })']
+...
+---
+# Plain middle click: keep it a middle click (paste, open link in new tab)
+- MouseGesture: [Middle Button]
+- MouseClick: [middle, 1]
+...
