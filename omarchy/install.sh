@@ -47,7 +47,7 @@ for f in "$HERE"/bin/*; do
 done
 
 echo "omarchy hyprland:"
-for f in hyprland.lua looknfeel.lua bindings.lua input.lua; do
+for f in hyprland.lua looknfeel.lua bindings.lua input.lua autostart.lua; do
     add_snippet "$f"
 done
 # Display scale for the ThinkPad T14 Gen 5 panel only
